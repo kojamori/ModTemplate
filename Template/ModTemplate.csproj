@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net48</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        
+        <AssemblyName>generatedAssemblyName</AssemblyName>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <OutputPath>bin\Debug\</OutputPath>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <SFSPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\')">C:\Program Files (x86)\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\</SFSPath>
+        
+        <!-- koja mori's steam path -->
+        <SFSPath Condition="'$(SFSPath)' == '' And Exists('$([System.Environment]::GetFolderPath(SpecialFolder.UserProfile))\Applications\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\')">$([System.Environment]::GetFolderPath(SpecialFolder.UserProfile))\Applications\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\</SFSPath>
+        
+        <SFSPath Condition="'$(SFSPath)' == '' And Exists('$(([System.Environment]::GetFolderPath(SpecialFolder.UserProfile)))\Library\Application Support\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\')">$([System.Environment]::GetFolderPath(SpecialFolder.UserProfile))\Library\Application Support\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\</SFSPath>
+
+        <SFSPath Condition="'$(SFSPath)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\</SFSPath>
+    </PropertyGroup>
+
+    <Target Name="VerifySFSPath" BeforeTargets="CoreCompile;PrepareForBuild">
+        <Message Text="Spaceflight Simulator path resolved via XML conditions to: $(SFSPath)" Importance="High" />
+    </Target>
+
+    <ItemGroup>
+        <Reference Include="$(SFSPath)\Spaceflight Simulator_Data\Managed\*.dll">
+            <Private>false</Private>
+        </Reference>
+
+        <!-- Mod References  =====================================================-->
+
+        <Reference Include="UITools">
+            <HintPath>$(SFSPath)\Mods\UITools\UITools.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+
+        <Reference Include="UniLog">
+            <HintPath>$(SFSPath)\Mods\UniLog\UniLog.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+
+        <!-- ===================================================================-->
+    </ItemGroup>
+
+    <PropertyGroup>
+        <EnableModCopy>$autoCopyMod$</EnableModCopy>
+    </PropertyGroup>
+
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="Exists('$(SFSPath)') And '$(EnableModCopy)' == 'true'">
+        <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="$(SFSPath)\Mods\$(AssemblyName)\" />
+    </Target>
+
+</Project>

@@ -109,8 +109,7 @@
     "updateLink": {
       "type": "parameter",
       "datatype": "string",
-      "defaultValue": "",
-      "replaces": "updateLink"
+      "defaultValue": ""
     },
     "licenseType": {
       "type": "parameter",
@@ -159,15 +158,19 @@
     "copyrightHolder": {
       "type": "parameter",
       "datatype": "string",
-      "defaultValue": "author",
-      "replaces": "copyrightHolder"
+      "defaultValue": ""
     },
-    "gitUsername": {
-      "type": "parameter",
-      "datatype": "string",
-      "defaultValue": "",
-      "replaces": "gitUsername"
+    "generatedCopyrightHolder": {
+      "type": "generated",
+      "generator": "coalesce",
+      "parameters": {
+        "source": "copyrightHolder,author",
+        "sourceVariableName": "copyrightHolder",
+        "fallbackVariableName": "author"
+      },
+      "replaces": "generatedCopyrightHolder"
     },
+
     "git": {
       "type": "parameter",
       "datatype": "bool",
@@ -176,14 +179,29 @@
     "discordLink": {
       "type": "parameter",
       "datatype": "string",
-      "defaultValue": "",
-      "replaces": "discordLink"
+      "defaultValue": ""
     },
     "readMeDescription": {
       "type": "parameter",
       "datatype": "string",
-      "defaultValue": "",
-      "replaces": "readMeDescription"
+      "parameters": {
+        "sourceVariableName": ""
+      }
+    },
+    "generatedReadMeDescription": {
+      "type": "generated",
+      "generator": "coalesce",
+      "parameters": {
+        "source": "readMeDescription,modDescription",
+        "sourceVariableName": "readMeDescription",
+        "fallbackVariableName": "modDescription"
+      },
+      "replaces": "generatedReadMeDescription"
+    },
+    "harmony": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true"
     }
   },
   "sources": [

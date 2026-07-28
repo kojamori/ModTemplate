@@ -9,13 +9,18 @@
         <OutputPath>bin\Debug\</OutputPath>
     </PropertyGroup>
 
+
     <PropertyGroup>
+        <!-- Credits to https://til.cazzulino.com/msbuild/how-to-get-user-home-dir-cross-platform for this! -->
+        <UserProfileHome Condition="'$([MSBuild]::IsOSUnixLike())' == 'true'">$(HOME)</UserProfileHome>
+        <UserProfileHome Condition="'$([MSBuild]::IsOSUnixLike())' != 'true'">$(USERPROFILE)</UserProfileHome>
+
         <SFSPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\')">C:\Program Files (x86)\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\</SFSPath>
         
         <!-- koja mori's steam path -->
-        <SFSPath Condition="'$(SFSPath)' == '' And Exists('$([System.Environment]::GetFolderPath(SpecialFolder.UserProfile))\Applications\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\')">$([System.Environment]::GetFolderPath(SpecialFolder.UserProfile))\Applications\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\</SFSPath>
+        <SFSPath Condition="'$(SFSPath)' == '' And Exists('$(UserProfileHome)\Applications\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\')">$(UserProfileHome)\Applications\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\</SFSPath>
         
-        <SFSPath Condition="'$(SFSPath)' == '' And Exists('$(([System.Environment]::GetFolderPath(SpecialFolder.UserProfile)))\Library\Application Support\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\')">$([System.Environment]::GetFolderPath(SpecialFolder.UserProfile))\Library\Application Support\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\</SFSPath>
+        <SFSPath Condition="'$(SFSPath)' == '' And Exists('$(UserProfileHome)\Library\Application Support\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\')">$(UserProfileHome)\Library\Application Support\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\</SFSPath>
 
         <SFSPath Condition="'$(SFSPath)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\</SFSPath>
     </PropertyGroup>

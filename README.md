@@ -2,7 +2,15 @@
 
 A dotnet template for creating SFS code mods easily and quickly, no more writing boilerplate yourself.
 
+# Installation
+
+## NuGet Package
+
+https://www.nuget.org/packages/kojamori.SFS.CodeMod/1.0.0
+
 # Usage
+
+## Example setup
 
 ```cmd
 dotnet new sfsmod -n BestSFSMod -p:a kojamori --modDisplayName "Best SFS Mod"

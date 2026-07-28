@@ -3,10 +3,10 @@
   <PropertyGroup>
     <!-- The package metadata. Fill in the properties marked as TODO below -->
     <!-- Follow the instructions on https://learn.microsoft.com/en-us/nuget/create-packages/package-authoring-best-practices -->
-    <PackageId>KojaMori.SFS.CodeMod</PackageId>
+    <PackageId>kojamori.SFS.CodeMod</PackageId>
     <PackageVersion>1.0</PackageVersion>
     <Title>SFS Code Mode Template</Title>
-    <Authors>Koja Mori</Authors>
+    <Authors>kojamori</Authors>
     <Description>A .NET Framework 4.8 template for creating DLL mods for the video game Spaceflight Simulator (SFS). </Description>
     <PackageTags>dotnet-new;templates;kojamori;sfs;game;modding;mod;gaming</PackageTags>
     <PackageProjectUrl>https://github.com/kojamori/ModTemplate</PackageProjectUrl>

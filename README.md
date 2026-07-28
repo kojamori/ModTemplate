@@ -1,3 +1,7 @@
+# SFS Code Mod Template
+
+A dotnet template for creating SFS code mods easily and quickly, no more writing boilerplate yourself.
+
 # Usage
 
 ```cmd
@@ -44,3 +48,7 @@ dotnet new sfsmod -n BestSFSMod -p:a kojamori --modDisplayName "Best SFS Mod"
 - `-di`, `--discordLink <discordLink>`: A link to the mod's or author's Discord community. (Default: `""`)
 - `-re`, `--readMeDescription <readMeDescription>`: Description text for the README file, under the first H1. (Default: Falls back to `--modDescription`)
 - `-h`, `--harmony <harmony>`: Whether to include Harmony patching boilerplate code. (Default: `true`)
+
+# License
+
+See [LICENSE](LICENSE).

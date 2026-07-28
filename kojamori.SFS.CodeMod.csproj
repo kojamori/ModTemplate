@@ -11,6 +11,8 @@
     <PackageTags>dotnet-new;templates;kojamori;sfs;game;modding;mod;gaming</PackageTags>
     <PackageProjectUrl>https://github.com/kojamori/ModTemplate</PackageProjectUrl>
 
+    
+
     <!-- Keep package type as 'Template' to show the package as a template package on nuget.org and make your template available in dotnet new search.-->
     <PackageType>Template</PackageType>
     <TargetFramework>net48</TargetFramework>
@@ -30,6 +32,12 @@
     <PackageReference Include="Microsoft.TemplateEngine.Tasks" Version="*" PrivateAssets="all" IsImplicitlyDefined="true"/>
   </ItemGroup>
 
+  <PropertyGroup>
+    <RepositoryUrl>https://github.com/kojamori/ModTemplate</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+  </PropertyGroup>
+
   <ItemGroup>
     <Content Include="content\**\*" Exclude="content\**\bin\**;content\**\obj\**" />
     <Compile Remove="**\*" />
@@ -41,7 +49,6 @@
 
   <PropertyGroup>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>

@@ -2,7 +2,7 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Koja Mori",
   "classifications": ["Game", "Mod", "SFS"],
-  "identity": "SFSTemplates.CodeMod",
+  "identity": "KojaMori.SFS.CodeMod",
   "name": "SFS Code Mod",
   "shortName": "sfsmod",
   "sourceName": "generatedModNameId",

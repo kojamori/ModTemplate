@@ -49,6 +49,12 @@ dotnet new sfsmod -n BestSFSMod -p:a kojamori --modDisplayName "Best SFS Mod"
 - `-re`, `--readMeDescription <readMeDescription>`: Description text for the README file, under the first H1. (Default: Falls back to `--modDescription`)
 - `-h`, `--harmony <harmony>`: Whether to include Harmony patching boilerplate code. (Default: `true`)
 
+# Social Media
+
+## Discord
+
+https://discord.gg/QHEmcehAe9
+
 # License
 
 See [LICENSE](LICENSE).

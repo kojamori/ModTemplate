@@ -4,6 +4,10 @@ A .NET Framework 4.8 template for creating SFS code mods easily and quickly, no 
 
 This template attempts to automatically locate the SFS game folder and reference all managed DLLs by searching common Steam installation paths on Windows and MacOS, but is untested on the latter OS.
 
+## Autocopy Mod
+
+One of the features of this template is that MSBuild can copy the build DLL into the SFS mods folder after building the mod successfully. You can enable/disable this by changing the `EnableModCopy` value in the project's `.csproj` from `True/False`.
+
 # Requirements
 
 - .NET SDK 6.0 and newer
@@ -35,6 +39,7 @@ dotnet new sfsmod -n BestSFSMod -p:a kojamori --modDisplayName "Best SFS Mod"
 - `-mi`, `--minimumGameVersion <minimumGameVersion>`: The minimum game version required to run the mod. (Default: `1.6.00.18`)
 - `-li`, `--licenseType <MIT|LGPL (v3)|...>`: The open-source license type for the mod code. (Default: `MIT`)
 - `-h`, `--harmony <harmony>`: Whether to include Harmony patching boilerplate code. (Default: `true`)
+- `-au`, `--autoCopyMod`: Automatically copies the mod to `Spaceflight Simulator Game/Mods/modNameId/` directory on build. (Default: `false`)
 
 ## All Options
 

@@ -1,0 +1,28 @@
+name: Publish .NET Framework 4.8 Package
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    runs-on: windows-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build and Pack Project
+        run: |
+          dotnet pack YourProject.csproj --configuration Release --outputDirectory bin/Release
+
+      - name: Add GitHub NuGet Source and Push
+        run: |
+          dotnet nuget add source --name "GitHub" --username "${{ github.repository_owner }}" --password "${{ secrets.GITHUB_TOKEN }}" --store-password-in-clear-text "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
+          dotnet nuget push "bin\Release\*.nupkg" --source "GitHub" --skip-duplicate

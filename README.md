@@ -1,20 +1,22 @@
 # SFS Code Mod Template
 
-A dotnet template for creating SFS code mods easily and quickly, no more writing boilerplate yourself.
+A .NET Framework 4.8 template for creating SFS code mods easily and quickly, no more writing boilerplate yourself.
+
+This template attempts to automatically locate the SFS game folder and reference all managed DLLs by searching common Steam installation paths on Windows and MacOS, but is untested on the latter OS.
+
+# Requirements
+
+- .NET SDK 6.0 and newer
 
 # Installation
 
-## NuGet Package
-
-https://www.nuget.org/packages/kojamori.SFS.Templates.CodeMod/1.0.0
-
-```cmd
-dotnet new install kojamori.SFS.Templates.CodeMod@1.0.0
-```
+1. Install the `.nupkg` file from the latest release [here](https://github.com/kojamori/SFS-Code-Mod-Template/releases/).
+2. Open a terminal in the same folder as the `.nupkg` and run the following command:
+   `dotnet new install kojamori.SFS.Templates.CodeMod.nupkg`
 
 # Usage
 
-## Example setup
+Example usage:
 
 ```cmd
 dotnet new sfsmod -n BestSFSMod -p:a kojamori --modDisplayName "Best SFS Mod"

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <!-- The package metadata. Fill in the properties marked as TODO below -->
     <!-- Follow the instructions on https://learn.microsoft.com/en-us/nuget/create-packages/package-authoring-best-practices -->
-    <PackageId>kojamori.SFS.CodeMod</PackageId>
+    <PackageId>kojamori.SFS.Templates.CodeMod</PackageId>
     <PackageVersion>1.0</PackageVersion>
     <Title>SFS Code Mode Template</Title>
     <Authors>kojamori</Authors>
@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <RepositoryUrl>https://github.com/kojamori/ModTemplate</RepositoryUrl>
+    <RepositoryUrl>https://github.com/</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>

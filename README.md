@@ -6,7 +6,11 @@ A dotnet template for creating SFS code mods easily and quickly, no more writing
 
 ## NuGet Package
 
-https://www.nuget.org/packages/kojamori.SFS.CodeMod/1.0.0
+https://www.nuget.org/packages/kojamori.SFS.Templates.CodeMod/1.0.0
+
+```cmd
+dotnet new install kojamori.SFS.Templates.CodeMod@1.0.0
+```
 
 # Usage
 

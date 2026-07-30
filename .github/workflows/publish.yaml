@@ -21,13 +21,11 @@ jobs:
       - name: Restore
         run: dotnet restore
 
-      - name: Pack Projects
+      - name: Pack Template
         shell: pwsh
         run: |
           $out = Join-Path $PWD "bin\Release"
-          Get-ChildItem -Path . -Filter *.csproj -Recurse | ForEach-Object {
-            dotnet pack $_.FullName -c Release -o $out
-          }
+          dotnet pack ".\kojamori.SFS.Templates.CodeMod.csproj" -c Release -o $out
 
       - name: Add GitHub NuGet Source and Push
         shell: pwsh

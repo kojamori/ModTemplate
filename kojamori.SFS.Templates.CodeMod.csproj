@@ -4,7 +4,7 @@
     <!-- The package metadata. Fill in the properties marked as TODO below -->
     <!-- Follow the instructions on https://learn.microsoft.com/en-us/nuget/create-packages/package-authoring-best-practices -->
     <PackageId>kojamori.SFS.Templates.CodeMod</PackageId>
-    <PackageVersion>1.0</PackageVersion>
+    <PackageVersion>1.0.1</PackageVersion>
     <Title>SFS Code Mode Template</Title>
     <Authors>kojamori</Authors>
     <Description>A .NET Framework 4.8 template for creating DLL mods for the video game Spaceflight Simulator (SFS). </Description>

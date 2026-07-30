@@ -14,9 +14,9 @@ One of the features of this template is that MSBuild can copy the build DLL into
 
 # Installation
 
-1. Install the `.nupkg` file from the latest release [here](https://github.com/kojamori/SFS-Code-Mod-Template/releases/).
-2. Open a terminal in the same folder as the `.nupkg` and run the following command:
-   `dotnet new install kojamori.SFS.Templates.CodeMod.nupkg`
+```cmd
+dotnet add package kojamori.SFS.Templates.CodeMod
+```
 
 # Usage
 

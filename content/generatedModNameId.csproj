@@ -14,16 +14,39 @@
         <!-- Credits to https://til.cazzulino.com/msbuild/how-to-get-user-home-dir-cross-platform for this! -->
         <UserProfileHome Condition="'$([MSBuild]::IsOSUnixLike())' == 'true'">$(HOME)</UserProfileHome>
         <UserProfileHome Condition="'$([MSBuild]::IsOSUnixLike())' != 'true'">$(USERPROFILE)</UserProfileHome>
-
-        <SFSPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\')">C:\Program Files (x86)\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\</SFSPath>
-        
-        <!-- koja mori's steam path -->
-        <SFSPath Condition="'$(SFSPath)' == '' And Exists('$(UserProfileHome)\Applications\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\')">$(UserProfileHome)\Applications\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\</SFSPath>
-        
-        <SFSPath Condition="'$(SFSPath)' == '' And Exists('$(UserProfileHome)\Library\Application Support\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\')">$(UserProfileHome)\Library\Application Support\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\</SFSPath>
-
-        <SFSPath Condition="'$(SFSPath)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\</SFSPath>
     </PropertyGroup>
+
+    <PropertyGroup>
+        <!-- Windows typical steam path -->
+        <SteamPath Condition="Exists('C:\Program Files (x86)\Steam')">
+            C:\Program Files (x86)\Steam
+        </SteamPath>
+
+        <!-- koja mori's steam path -->
+        <SteamPath Condition="'$(SteamPath)' == '' And Exists('$(UserProfileHome)\Applications\Steam')">
+            $(UserProfileHome)\Applications\Steam
+        </SteamPath>
+        
+        <!-- MacOS typical steam path -->
+        <SteamPath Condition="'$(SteamPath)' == '' And Exists('$(UserProfileHome)\Library\Application Support\Steam')">
+            $(UserProfileHome)\Library\Application Support\Steam
+        </SteamPath>
+
+        <!-- fallback -->
+        <SteamPath Condition="'$(SteamPath)' == ''">
+            C:\Program Files (x86)\Steam
+        </SteamPath>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <SFSPath>
+            $(SteamPath)\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game
+        </SFSPath>
+
+        <ModsFolder>
+            $(SFSPath)\Mods
+        </ModsFolder>
+    </PropertyGroup> 
 
     <Target Name="VerifySFSPath" BeforeTargets="CoreCompile;PrepareForBuild">
         <Message Text="Spaceflight Simulator path resolved via XML conditions to: $(SFSPath)" Importance="High" />
@@ -36,12 +59,12 @@
 
         <!-- Mod References  =====================================================-->
 
-        <Reference Include="UITools">
+        <Reference Include="UITools" Condition="Exists('$(SFSPath)\Mods\UITools')">
             <HintPath>$(SFSPath)\Mods\UITools\UITools.dll</HintPath>
             <Private>false</Private>
         </Reference>
 
-        <Reference Include="UniLog">
+        <Reference Include="UniLog" Condition="Exists('$(SFSPath)\Mods\UniLog')">
             <HintPath>$(SFSPath)\Mods\UniLog\UniLog.dll</HintPath>
             <Private>false</Private>
         </Reference>
@@ -54,7 +77,7 @@
     </PropertyGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="Exists('$(SFSPath)') And '$(EnableModCopy)' == 'true'">
-        <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="$(SFSPath)\Mods\$(AssemblyName)\" />
+        <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="$(ModsFolder)\$(AssemblyName)\" />
     </Target>
 
 </Project>

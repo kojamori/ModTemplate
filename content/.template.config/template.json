@@ -10,11 +10,14 @@
     "language": "C#",
     "type": "project"
   },
+  "description": "A .NET Framework 4.8 template for creating SFS code mods easily and quickly, no more writing boilerplate yourself. Find more information at https://github.com/kojamori/SFS-Code-Mod-Template",
   "symbols": {
     "assemblyName": {
       "type": "parameter",
       "datatype": "string",
-      "defaultValue": ""
+      "defaultValue": "",
+      "description": "The assembly name for the generated project. If left empty, the Mod Name ID will be used as the assembly name.",
+      "displayName": "Assembly Name"
     },
     "generatedAssemblyName": {
       "type": "generated",
@@ -30,7 +33,9 @@
     "autoCopyMod": {
       "type": "parameter",
       "datatype": "bool",
-      "defaultValue": "false"
+      "defaultValue": "false",
+      "description": "Whether to automatically copy built mods into the SFS mods folder.",
+      "displayName": "Automatic Mod Copying"
     },
     "generatedAutoCopyMod": {
       "type": "derived",
@@ -42,7 +47,9 @@
     "rootNamespace": {
       "type": "parameter",
       "datatype": "string",
-      "defaultValue": ""
+      "defaultValue": "",
+      "description": "The root namespace of the assembly. Defaults to the ModNameID if left empty.",
+      "displayName": "Root Namespace"
     },
     "generatedRootNamespace": {
       "type": "generated",
@@ -58,7 +65,9 @@
     "modNameId": {
       "type": "parameter",
       "datatype": "string",
-      "defaultValue": ""
+      "defaultValue": "",
+      "description": "The ModNameID for the mod. This is used as the unique identifier for the mod. It should not contain spaces or special characters. If left empty, the project name will be used as the ModNameID.",
+      "displayName": "Mod Name ID"
     },
     "generatedModNameId": {
       "type": "generated",
@@ -74,7 +83,9 @@
     "modDisplayName": {
       "type": "parameter",
       "datatype": "string",
-      "defaultValue": ""
+      "defaultValue": "",
+      "description": "The display name for the mod; what users will see in the in-game mod list. If left empty, the Mod Name ID will be used as the display name.",
+      "displayName": "Mod Display Name"
     },
     "generatedModDisplayName": {
       "type": "generated",
@@ -91,30 +102,40 @@
       "type": "parameter",
       "datatype": "string",
       "defaultValue": "",
-      "replaces": "author"
+      "replaces": "author",
+      "description": "The author of the mod. This is used in the mod's metadata and is displayed in the game.",
+      "displayName": "Author"
     },
     "minimumGameVersion": {
       "type": "parameter",
       "datatype": "string",
       "defaultValue": "1.6.00.18",
-      "replaces": "minimumGameVersion"
+      "replaces": "minimumGameVersion",
+      "description": "The minimum game version required for the mod to work. Note this has no effect on the mod's compatibility with the game; it is purely informational. This defaults to the current game version (1.6.00.18).",
+      "displayName": "Minimum Game Version"
     },
     "modVersion": {
       "type": "parameter",
       "datatype": "string",
       "defaultValue": "1.0.0",
-      "replaces": "modVersion"
+      "replaces": "modVersion",
+      "description": "The version of the mod.",
+      "displayName": "Mod Version"
     },
     "modDescription": {
       "type": "parameter",
       "datatype": "string",
       "defaultValue": "",
-      "replaces": "modDescription"
+      "replaces": "modDescription",
+      "description": "A brief description of the mod. This is displayed in the in-game mod list.",
+      "displayName": "Mod Description"
     },
     "updateLink": {
       "type": "parameter",
       "datatype": "string",
-      "defaultValue": ""
+      "defaultValue": "",
+      "description": "The source link for the mod's latest DLL release. Used for automatic updating using Neptune-Sky's UITools' IUpdatable interface. Details at https://github.com/cucumber-sp/UITools.",
+      "displayName": "DLL Update Link"
     },
     "licenseType": {
       "type": "parameter",
@@ -123,30 +144,37 @@
       "choices": [
         {
           "choice": "MIT",
+          "displayName": "MIT License",
           "description": "MIT License"
         },
         {
           "choice": "LGPL (v3)",
+          "displayName": "GNU Lesser General Public License v3",
           "description": "GNU Lesser General Public License v3"
         },
         {
           "choice": "GPL (v3)",
+          "displayName": "GNU General Public License v3",
           "description": "GNU General Public License v3"
         },
         {
           "choice": "AGPL (v3)",
+          "displayName": "GNU Affero General Public License v3",
           "description": "GNU Affero General Public License v3"
         },
         {
           "choice": "apache2.0",
+          "displayName": "Apache License 2.0",
           "description": "Apache License 2.0"
         },
         {
           "choice": "mozilla2.0",
+          "displayName": "Mozilla Public License 2.0",
           "description": "Mozilla Public License 2.0"
         },
         {
           "choice": "unlicense",
+          "displayName": "The Unlicense",
           "description": "The Unlicense"
         }
       ],
@@ -163,7 +191,9 @@
     "copyrightHolder": {
       "type": "parameter",
       "datatype": "string",
-      "defaultValue": ""
+      "defaultValue": "",
+      "description": "The copyright holder for the mod.",
+      "displayName": "Copyright Holder"
     },
     "generatedCopyrightHolder": {
       "type": "generated",
@@ -179,19 +209,23 @@
     "git": {
       "type": "parameter",
       "datatype": "bool",
-      "defaultValue": "true"
+      "defaultValue": "true",
+      "description": "Whether to initialize a local Git repository in the generated project folder.",
+      "displayName": "Initialize Git Repository"
     },
     "discordLink": {
       "type": "parameter",
       "datatype": "string",
-      "defaultValue": ""
+      "defaultValue": "",
+      "description": "The Discord invite link for the mod's server. This is displayed in the in-game mod list.",
+      "displayName": "Discord Invite Link"
     },
     "readMeDescription": {
       "type": "parameter",
       "datatype": "string",
-      "parameters": {
-        "sourceVariableName": ""
-      }
+      "defaultValue": "",
+      "description": "The description in the mod's README.",
+      "displayName": "README Description"
     },
     "generatedReadMeDescription": {
       "type": "generated",
@@ -206,12 +240,16 @@
     "harmony": {
       "type": "parameter",
       "datatype": "bool",
-      "defaultValue": "true"
+      "defaultValue": "true",
+      "description": "Whether to include Harmony boilerplate in the mod. Harmony is a library for patching .NET methods at runtime, allowing mods to modify the behavior of the game without modifying its source code.",
+      "displayName": "Include Harmony Boilerplate"
     },
     "implicitManagedReferences": {
       "type": "parameter",
       "datatype": "bool",
-      "defaultValue": "true"
+      "defaultValue": "true",
+      "description": "Whether to implicitly include all managed DLLs as references. If set to false, only Assembly-CSharp.dll, UnityEngine.dll, 0Harmony.dll and UnityEngine.CoreModule.dll will be included as references. This can reduce naming conflicts.",
+      "displayName": "Include Implicit Managed References"
     },
     "generatedImplicitManagedReferences": {
       "type": "derived",

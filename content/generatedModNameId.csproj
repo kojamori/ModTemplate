@@ -74,13 +74,13 @@
 
     <ItemGroup>
         <!-- Mod References  =====================================================-->
-        <Reference Include="UITools" Condition="Exists('$(SFSPath)\Mods\UITools')">
-            <HintPath>$(SFSPath)\Mods\UITools\UITools.dll</HintPath>
+        <Reference Include="UITools" Condition="Exists('$(ModsFolder)\UITools')">
+            <HintPath>$(ModsFolder)\UITools\UITools.dll</HintPath>
             <Private>false</Private>
         </Reference>
 
-        <Reference Include="UniLog" Condition="Exists('$(SFSPath)\Mods\UniLog')">
-            <HintPath>$(SFSPath)\Mods\UniLog\UniLog.dll</HintPath>
+        <Reference Include="UniLog" Condition="Exists('$(ModsFolder)\UniLog')">
+            <HintPath>$(ModsFolder)\UniLog\UniLog.dll</HintPath>
             <Private>false</Private>
         </Reference>
     </ItemGroup>

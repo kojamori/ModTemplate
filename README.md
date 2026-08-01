@@ -32,13 +32,12 @@ You can also set `--implicitManagedReferences` (shorthand: `-im`) to `false` whe
 
 # Installation
 
-Run the following command in your terminal to install the template:
+1. Install the `.nupkg` from the [Releases](https://github.com/kojamori/SFS-Code-Mod-Template/releases) page.
+2. Run the following command in a terminal in the directory where the `.nupkg` is located:
 
 ```cmd
-dotnet add package kojamori.SFS.Templates.CodeMod
+dotnet new install kojamori.SFS.Templates.CodeMod.1.2.1.nupkg
 ```
-
-Alternatively, you can also install the nupkg from the [Releases](https://github.com/kojamori/SFS-Code-Mod-Template/releases) page.
 
 ## Building the Template from Source
 

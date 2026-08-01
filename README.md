@@ -32,28 +32,55 @@ You can also set `--implicitManagedReferences` (shorthand: `-im`) to `false` whe
 
 # Installation
 
+Run the following command in your terminal to install the template:
+
 ```cmd
 dotnet add package kojamori.SFS.Templates.CodeMod
 ```
 
+Alternatively, you can also install the nupkg from the [Releases](https://github.com/kojamori/SFS-Code-Mod-Template/releases) page.
+
+## Building the Template from Source
+
+To build the template from source, clone the repository and run the following command in the template directory:
+
+```cmd
+dotnet pack
+```
+
+This will create a `.nupkg` file in `bin\Release` that you can install locally using `dotnet new install`.
+
 # Usage
 
-Example usage:
+## IDE Usage
+
+### Visual Studio
+
+When using Visual Studio, you can also use the "Create a new project" dialog and search for "SFS Code Mod Template" to create a new SFS mod project, as seen in the screenshots below.
+![Screenshot](./assets/vs_usage1.png)
+![Screenshot](./assets/vs_usage2.png)
+
+### JetBrains Rider
+
+When using JetBrains Rider, you can also use the "New Solution" dialog and select the "SFS Code Mod Template" on the bottom-left side, below "Custom Templates" to create a new SFS mod project, as seen in the screenshot below.
+![Screenshot](./assets/rider_usage.png)
+
+## Command Line Usage
 
 ```cmd
 dotnet new sfsmod -n BestSFSMod -p:a kojamori --modDisplayName "Best SFS Mod"
 ```
 
-# Options
+# Template Parameters
 
-## Required Options
+## Required Parameters
 
 These are the required options for creating a new SFS mod project using this template.
 They won't necessarily prevent the project from being created, but these will cause issues if not specified.
 
 - `-n` or `-m`: The name of the project and mod. This is also used as the root namespace and assembly name if not specified otherwise. (Default: `""`)
 
-## Most Common Mod Options
+## Most Common Mod Parameters
 
 - `-n`, `--name <name>`: The name of the project and mod.
 - `-m`, `--modNameId <modNameId>`: The unique identifier for the mod (`Mod.ModNameID`). (Default: Falls back to `--name`)
@@ -67,7 +94,7 @@ They won't necessarily prevent the project from being created, but these will ca
 - `-ha`, `--harmony <harmony>`: Whether to include Harmony patching boilerplate code. (Default: `true`)
 - `-au`, `--autoCopyMod`: Automatically copies the mod to `Spaceflight Simulator Game/Mods/modNameId/` directory on build. (Default: `false`)
 
-## All Options
+## All Parameters
 
 - `-as`, `--assemblyName <assemblyName>`: The assembly name for the compiled mod. (Default: Falls back to `--modNameId` or `--name`)
 - `-au`, `--autoCopyMod`: Automatically copies the mod to `Spaceflight Simulator Game/Mods/modNameId/` directory on build. (Default: `false`)

@@ -176,9 +176,16 @@
           "choice": "unlicense",
           "displayName": "The Unlicense",
           "description": "The Unlicense"
+        },
+        {
+          "choice": "none",
+          "displayName": "No License",
+          "description": "No license. The mod will not include a license file."
         }
       ],
-      "replaces": "licenseType"
+      "replaces": "licenseType",
+      "description": "The open source license type for the mod. This is used in the mod's metadata and is displayed in the game.",
+      "displayName": "License Type"
     },
     "copyrightYear": {
       "type": "generated",
@@ -363,6 +370,18 @@
           "rename": {
             "LICENSE.unlicense": "LICENSE"
           }
+        },
+        {
+          "condition": "(licenseType == 'none')",
+          "exclude": [
+            "LICENSE.AGPLv3",
+            "LICENSE.apache2.0",
+            "LICENSE.GPLv3",
+            "LICENSE.LGPLv3",
+            "LICENSE.MIT",
+            "LICENSE.mozilla2.0",
+            "LICENSE.unlicense"
+          ]
         }
       ]
     }

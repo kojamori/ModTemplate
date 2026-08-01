@@ -32,23 +32,19 @@ You can also set `--implicitManagedReferences` (shorthand: `-im`) to `false` whe
 
 # Installation
 
-Run the following command in your terminal to install the template:
+Run the following command to install the template from NuGet:
 
-```cmd
-dotnet add package kojamori.SFS.Templates.CodeMod
+```dotnetcli
+dotnet new install kojamori.SFS.Templates.CodeMod@1.2.1
 ```
 
-Alternatively, you can also install the nupkg from the [Releases](https://github.com/kojamori/SFS-Code-Mod-Template/releases) page.
+## Updating
 
-## Building the Template from Source
+Run the following command to update the template from NuGet:
 
-To build the template from source, clone the repository and run the following command in the template directory:
-
-```cmd
-dotnet pack
+```dotnetcli
+dotnet new update
 ```
-
-This will create a `.nupkg` file in `bin\Release` that you can install locally using `dotnet new install`.
 
 # Usage
 
@@ -57,13 +53,13 @@ This will create a `.nupkg` file in `bin\Release` that you can install locally u
 ### Visual Studio
 
 When using Visual Studio, you can also use the "Create a new project" dialog and search for "SFS Code Mod Template" to create a new SFS mod project, as seen in the screenshots below.
-![Screenshot](./assets/vs_usage1.png)
-![Screenshot](./assets/vs_usage2.png)
+![Screenshot](https://raw.githubusercontent.com/kojamori/SFS-Code-Mod-Template/refs/heads/main/assets/vs_usage1.png)
+![Screenshot](https://raw.githubusercontent.com/kojamori/SFS-Code-Mod-Template/refs/heads/main/assets/vs_usage2.png)
 
 ### JetBrains Rider
 
 When using JetBrains Rider, you can also use the "New Solution" dialog and select the "SFS Code Mod Template" on the bottom-left side, below "Custom Templates" to create a new SFS mod project, as seen in the screenshot below.
-![Screenshot](./assets/rider_usage.png)
+![Screenshot](https://raw.githubusercontent.com/kojamori/SFS-Code-Mod-Template/refs/heads/main/assets/rider_usage.png)
 
 ## Command Line Usage
 

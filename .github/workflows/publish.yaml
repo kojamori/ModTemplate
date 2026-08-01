@@ -1,4 +1,4 @@
-name: Publish .NET Framework 4.8 Package
+name: Publish NuGet Package
 
 on:
   release:
@@ -10,7 +10,7 @@ jobs:
 
     permissions:
       contents: read
-      packages: write
+      id-token: write # Required for NuGet Trusted Publishing (OIDC)
 
     steps:
       - uses: actions/checkout@v4
@@ -27,8 +27,12 @@ jobs:
           $out = Join-Path $PWD "bin\Release"
           dotnet pack ".\kojamori.SFS.Templates.CodeMod.csproj" -c Release -o $out
 
-      - name: Add GitHub NuGet Source and Push
+      - name: NuGet login (OIDC -> temp API key)
+        uses: NuGet/login@v1
+        with:
+          user: kojamori # Replace with your exact NuGet.org username
+
+      - name: Push to NuGet.org
         shell: pwsh
         run: |
-          dotnet nuget add source --name "GitHub" --username "${{ github.repository_owner }}" --password "${{ secrets.GITHUB_TOKEN }}" --store-password-in-clear-text "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
-          dotnet nuget push "bin\Release\*.nupkg" --source "GitHub" --skip-duplicate
+          dotnet nuget push "bin\Release\*.nupkg" --source "https://api.nuget.org/v3/index.json" --skip-duplicate

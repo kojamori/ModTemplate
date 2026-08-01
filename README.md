@@ -28,6 +28,7 @@ You can also set `--implicitManagedReferences` (shorthand: `-im`) to `false` whe
 # Requirements
 
 - .NET SDK 6.0 and newer
+- SFS installed via Steam
 
 # Installation
 

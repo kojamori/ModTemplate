@@ -30,8 +30,13 @@
     "autoCopyMod": {
       "type": "parameter",
       "datatype": "bool",
-      "defaultValue": "false",
-      "replaces": "autoCopyMod"
+      "defaultValue": "false"
+    },
+    "generatedAutoCopyMod": {
+      "type": "derived",
+      "valueSource": "autoCopyMod",
+      "valueTransform": "lowerCaseForm",
+      "replaces": "generatedAutoCopyMod"
     },
 
     "rootNamespace": {
@@ -202,6 +207,22 @@
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "true"
+    },
+    "implicitManagedReferences": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true"
+    },
+    "generatedImplicitManagedReferences": {
+      "type": "derived",
+      "valueSource": "implicitManagedReferences",
+      "valueTransform": "lowerCaseForm",
+      "replaces": "generatedImplicitManagedReferences"
+    }
+  },
+  "forms": {
+    "lowerCaseForm": {
+      "identifier": "lowerCase"
     }
   },
   "sources": [

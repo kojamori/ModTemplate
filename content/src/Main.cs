@@ -22,7 +22,7 @@ namespace generatedRootNamespace
         public override string ModVersion => "modVersion";
         public override string Description => "modDescription";
 
-        public override Dictionary<string, string> Dependencies => new Dictionary<string, string>() { };
+        public override Dictionary<string, string> Dependencies => new Dictionary<string, string>();
     
         #if ( updateLink != "")
         // Automatic updating using Neptune-Sky's UITools' IUpdatable interface. Details at https://github.com/cucumber-sp/UITools.

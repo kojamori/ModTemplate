@@ -7,54 +7,85 @@
         <AssemblyName>generatedAssemblyName</AssemblyName>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <OutputPath>bin\Debug\</OutputPath>
-    </PropertyGroup>
 
+        <!-- DEFINE TEMPLATE TOKENS AS PROPERTIES INSTEAD OF ITEMS -->
+        <ImplicitManagedReferences>generatedImplicitManagedReferences</ImplicitManagedReferences>
+        <AutoCopyMod>generatedAutoCopyMod</AutoCopyMod>
+    </PropertyGroup>
 
     <PropertyGroup>
-        <!-- Credits to https://til.cazzulino.com/msbuild/how-to-get-user-home-dir-cross-platform for this! -->
+        <!-- Credits to https://cazzulino.com for this! -->
         <UserProfileHome Condition="'$([MSBuild]::IsOSUnixLike())' == 'true'">$(HOME)</UserProfileHome>
         <UserProfileHome Condition="'$([MSBuild]::IsOSUnixLike())' != 'true'">$(USERPROFILE)</UserProfileHome>
-
-        <SFSPath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\')">C:\Program Files (x86)\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\</SFSPath>
-        
-        <!-- koja mori's steam path -->
-        <SFSPath Condition="'$(SFSPath)' == '' And Exists('$(UserProfileHome)\Applications\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\')">$(UserProfileHome)\Applications\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\</SFSPath>
-        
-        <SFSPath Condition="'$(SFSPath)' == '' And Exists('$(UserProfileHome)\Library\Application Support\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\')">$(UserProfileHome)\Library\Application Support\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\</SFSPath>
-
-        <SFSPath Condition="'$(SFSPath)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game\</SFSPath>
     </PropertyGroup>
+
+    <PropertyGroup>
+        <!-- Windows typical steam path -->
+        <SteamPath Condition="Exists('C:\Program Files (x86)\Steam')">C:\Program Files (x86)\Steam</SteamPath>
+
+        <!-- koja mori's steam path -->
+        <SteamPath Condition="'$(SteamPath)' == '' And Exists('$(UserProfileHome)\Applications\Steam')">$(UserProfileHome)\Applications\Steam</SteamPath>
+        
+        <!-- MacOS typical steam path -->
+        <SteamPath Condition="'$(SteamPath)' == '' And Exists('$(UserProfileHome)\Library\Application Support\Steam')">$(UserProfileHome)\Library\Application Support\Steam</SteamPath>
+
+        <!-- fallback -->
+        <SteamPath Condition="'$(SteamPath)' == ''">C:\Program Files (x86)\Steam</SteamPath>
+    </PropertyGroup>
+
+    <!-- Common Paths -->
+    <PropertyGroup>
+        <SFSPath>$(SteamPath)\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game</SFSPath>
+        <ManagedFolder>$(SFSPath)\Spaceflight Simulator_Data\Managed</ManagedFolder>
+        <ModsFolder>$(SFSPath)\Mods</ModsFolder>
+    </PropertyGroup> 
 
     <Target Name="VerifySFSPath" BeforeTargets="CoreCompile;PrepareForBuild">
         <Message Text="Spaceflight Simulator path resolved via XML conditions to: $(SFSPath)" Importance="High" />
     </Target>
 
     <ItemGroup>
-        <Reference Include="$(SFSPath)\Spaceflight Simulator_Data\Managed\*.dll">
+        <Reference Include="$(ManagedFolder)\*.dll" Condition="'$(ImplicitManagedReferences)' == 'true'">
+            <Private>false</Private>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="Assembly-CSharp.dll" Condition="'$(ImplicitManagedReferences)' == 'false'">
+            <HintPath>$(ManagedFolder)\Assembly-CSharp.dll</HintPath>
             <Private>false</Private>
         </Reference>
 
-        <!-- Mod References  =====================================================-->
+        <Reference Include="UnityEngine.dll" Condition="'$(ImplicitManagedReferences)' == 'false'">
+            <HintPath>$(ManagedFolder)\UnityEngine.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
 
-        <Reference Include="UITools">
+        <Reference Include="UnityEngine.CoreModule.dll" Condition="'$(ImplicitManagedReferences)' == 'false'">
+            <HintPath>$(ManagedFolder)\UnityEngine.CoreModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+
+        <Reference Include="0Harmony.dll" Condition="'$(ImplicitManagedReferences)' == 'false'">
+            <HintPath>$(ManagedFolder)\0Harmony.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Mod References  =====================================================-->
+        <Reference Include="UITools" Condition="Exists('$(SFSPath)\Mods\UITools')">
             <HintPath>$(SFSPath)\Mods\UITools\UITools.dll</HintPath>
             <Private>false</Private>
         </Reference>
 
-        <Reference Include="UniLog">
+        <Reference Include="UniLog" Condition="Exists('$(SFSPath)\Mods\UniLog')">
             <HintPath>$(SFSPath)\Mods\UniLog\UniLog.dll</HintPath>
             <Private>false</Private>
         </Reference>
-
-        <!-- ===================================================================-->
     </ItemGroup>
 
-    <PropertyGroup>
-        <EnableModCopy>$autoCopyMod$</EnableModCopy>
-    </PropertyGroup>
-
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="Exists('$(SFSPath)') And '$(EnableModCopy)' == 'true'">
-        <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="$(SFSPath)\Mods\$(AssemblyName)\" />
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="Exists('$(SFSPath)') And '$(AutoCopyMod)' == 'true'">
+        <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="$(ModsFolder)\$(AssemblyName)\" />
     </Target>
-
 </Project>

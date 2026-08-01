@@ -1,38 +1,32 @@
-name: Publish NuGet Package
+deploy:
+  runs-on: windows-latest
 
-on:
-  release:
-    types: [published]
+  permissions:
+    contents: read
+    id-token: write # Required for NuGet Trusted Publishing
 
-jobs:
-  deploy:
-    runs-on: windows-latest
+  steps:
+    - uses: actions/checkout@v4
 
-    permissions:
-      contents: read
-      id-token: write # Required for NuGet Trusted Publishing (OIDC)
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
 
-    steps:
-      - uses: actions/checkout@v4
+    - name: Restore
+      run: dotnet restore
 
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v2
+    - name: Pack Template
+      shell: pwsh
+      run: |
+        $out = Join-Path $PWD "bin\Release"
+        dotnet pack ".\kojamori.SFS.Templates.CodeMod.csproj" -c Release -o $out
 
-      - name: Restore
-        run: dotnet restore
+    - name: NuGet login (OIDC -> temp API key)
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: kojamori # Your exact NuGet.org username
 
-      - name: Pack Template
-        shell: pwsh
-        run: |
-          $out = Join-Path $PWD "bin\Release"
-          dotnet pack ".\kojamori.SFS.Templates.CodeMod.csproj" -c Release -o $out
-
-      - name: NuGet login (OIDC -> temp API key)
-        uses: NuGet/login@v1
-        with:
-          user: kojamori # Replace with your exact NuGet.org username
-
-      - name: Push to NuGet.org
-        shell: pwsh
-        run: |
-          dotnet nuget push "bin\Release\*.nupkg" --source "https://api.nuget.org/v3/index.json" --skip-duplicate
+    - name: NuGet push
+      shell: pwsh
+      run: |
+        dotnet nuget push "bin\Release\*.nupkg" --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source "https://api.nuget.org/v3/index.json" --skip-duplicate

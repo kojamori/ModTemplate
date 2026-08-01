@@ -4,16 +4,17 @@ on:
   release:
     types: [published]
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   deploy:
     runs-on: windows-latest
 
-    permissions:
-      contents: read
-      id-token: write # Required for NuGet Trusted Publishing
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
@@ -27,13 +28,16 @@ jobs:
           $out = Join-Path $PWD "bin\Release"
           dotnet pack ".\kojamori.SFS.Templates.CodeMod.csproj" -c Release -o $out
 
-      - name: NuGet login (OIDC -> temp API key)
-        uses: NuGet/login@v1
+      - name: NuGet login (OIDC Trusted Publishing)
         id: login
+        uses: NuGet/login@v1
         with:
-          user: kojamori # Your exact NuGet.org username
+          user: kojamori
 
-      - name: NuGet push
+      - name: Publish NuGet Package
         shell: pwsh
         run: |
-          dotnet nuget push "bin\Release\*.nupkg" --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source "https://api.nuget.org/v3/index.json" --skip-duplicate
+          dotnet nuget push "bin\Release\*.nupkg" `
+            --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" `
+            --source "https://api.nuget.org/v3/index.json" `
+            --skip-duplicate

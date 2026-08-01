@@ -224,7 +224,7 @@
       "type": "parameter",
       "datatype": "string",
       "defaultValue": "",
-      "description": "The description in the mod's README.",
+      "description": "The description in the mod's README. Defaults to the mod description if left empty.",
       "displayName": "README Description"
     },
     "generatedReadMeDescription": {

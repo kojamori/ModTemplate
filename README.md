@@ -35,7 +35,7 @@ You can also set "Implicit Managed References" (`implicitManagedReferences`) to 
 Run the following command to install the template from [NuGet](https://www.nuget.org/packages/kojamori.SFS.Templates.CodeMod):
 
 ```dotnetcli
-dotnet new install kojamori.SFS.Templates.CodeMod@1.2.3
+dotnet new install kojamori.SFS.Templates.CodeMod@1.2.5
 ```
 
 ## Updating

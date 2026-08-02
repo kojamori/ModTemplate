@@ -32,10 +32,10 @@ You can also set `--implicitManagedReferences` (shorthand: `-im`) to `false` whe
 
 # Installation
 
-Run the following command to install the template from NuGet:
+Run the following command to install the template from [NuGet](https://www.nuget.org/packages/kojamori.SFS.Templates.CodeMod):
 
 ```dotnetcli
-dotnet new install kojamori.SFS.Templates.CodeMod@1.2.1
+dotnet new install kojamori.SFS.Templates.CodeMod@1.2.3
 ```
 
 ## Updating

@@ -35,7 +35,7 @@ You can also set "Implicit Managed References" (`implicitManagedReferences`) to 
 Run the following command to install the template from [NuGet](https://www.nuget.org/packages/kojamori.SFS.Templates.CodeMod):
 
 ```dotnetcli
-dotnet new install kojamori.SFS.Templates.CodeMod@1.2.5
+dotnet new install kojamori.SFS.Templates.CodeMod@1.2.6
 ```
 
 ## Updating
@@ -63,47 +63,40 @@ When using JetBrains Rider, you can also use the "New Solution" dialog and selec
 
 ## Command Line Usage
 
+Syntax:
+
 ```cmd
-dotnet new sfsmod -n BestSFSMod -p:a kojamori --modDisplayName "Best SFS Mod"
+dotnet new sfsmod [options] [template options]
 ```
 
-# Template Parameters
+Example usage:
 
-## Required Parameters
+```cmd
+dotnet new sfsmod -n BestSFSMod -au kojamori --modDisplayName "Best SFS Mod"
+```
+
+# Template Options (CLI)
+
+Ignore these options if you are using an IDE to create a new project, as the IDE will provide a GUI for you to fill in these options.
+
+## Essential Options
 
 These are the required options for creating a new SFS mod project using this template.
 They won't necessarily prevent the project from being created, but these will cause issues if not specified.
 
 - `-n` or `-m`: The name of the project and mod. This is also used as the root namespace and assembly name if not specified otherwise. (Default: `""`)
+- `-au`, `--param:author <param:author>`: The author's name. (Default: `""`)
 
-## Most Common Mod Parameters
+## Most Common Options
 
 - `-n`, `--name <name>`: The name of the project and mod.
 - `-m`, `--modNameId <modNameId>`: The unique identifier for the mod (`Mod.ModNameID`). (Default: Falls back to `--name`)
   - This should not contain spaces or special characters, otherwise you'll have to manually change broken strings like the root namespace in the generated project, as a namespace cannot contain spaces or special characters.
 - `-mo`, `--modDisplayName <modDisplayName>`: The user-friendly display name shown in-game. (Default: Falls back to `--modNameId`)
-- `-p:a`, `--param:author <param:author>`: The author's name. (Default: `""`)
+- `-au`, `--param:author <param:author>`: The author's name. (Default: `""`)
 - `-p:m`, `--modVersion <modVersion>`: The current version of the mod. (Default: `1.0.0`)
 - `-p:mo`, `--modDescription <modDescription>`: A short summary explaining what the mod does. (Default: `""`)
-- `-mi`, `--minimumGameVersion <minimumGameVersion>`: The minimum game version required to run the mod. (Default: `1.6.00.18`)
-- `-li`, `--licenseType <MIT|LGPL (v3)|...>`: The open-source license type for the mod code. (Default: `MIT`)
-- `-ha`, `--harmony <harmony>`: Whether to include Harmony patching boilerplate code. (Default: `true`)
-- `-au`, `--autoCopyMod`: Automatically copies the mod to `Spaceflight Simulator Game/Mods/modNameId/` directory on build. (Default: `false`)
-
-## All Parameters
-
-- `-as`, `--assemblyName <assemblyName>`: The assembly name for the compiled mod. (Default: Falls back to `--modNameId` or `--name`)
-- `-au`, `--autoCopyMod`: Automatically copies the mod to `Spaceflight Simulator Game/Mods/modNameId/` directory on build. (Default: `false`)
-- `-r`, `--rootNamespace <rootNamespace>`: The root namespace for the C# project. (Default: Falls back to `--modNameId` or `--name`)
-- `-m`, `--modNameId <modNameId>`: The `Mod.ModNameID`. (Default: Falls back to `--name`)
-  - This should not contain spaces or special characters, otherwise you'll have to manually change broken strings like the root namespace in the generated project, as a namespace cannot contain spaces or special characters.
-- `-mo`, `--modDisplayName <modDisplayName>`: The user-friendly display name of the mod shown in-game. (Default: Falls back to `--modNameId`)
-- `-p:a`, `--param:author <param:author>`: The author's name. (Default: `""`)
-- `-mi`, `--minimumGameVersion <minimumGameVersion>`: The minimum game version required to run this mod. (Default: `1.6.00.18`)
-- `-p:m`, `--modVersion <modVersion>`: The version of the mod. (Default: `1.0.0`)
-- `-p:mo`, `--modDescription <modDescription>`: A short description of what the mod does. (Default: `""`)
-- `-up`, `--updateLink <updateLink>`: DLL source for mod updates. (Default: `""`).
-  - Automatic updating using Neptune-Sky's UITools' IUpdatable interface. Details at https://github.com/cucumber-sp/UITools.
+- `-mi`, `--minimumGameVersion <minimumGameVersion>`: The minimum game version required to run the mod. (Default: `1.6.00.16`)
 - `-li`, `--licenseType <MIT|LGPL (v3)|...>`: The open-source license type for the mod code. (Default: `MIT`)
   - License options:
   - `MIT`: MIT License
@@ -113,11 +106,20 @@ They won't necessarily prevent the project from being created, but these will ca
   - `apache2.0`: Apache License 2.0
   - `mozilla2.0`: Mozilla Public License 2.0
   - `unlicense`: The Unlicense
+  - `none`: No license, all rights reserved
+- `-ha`, `--harmony <harmony>`: Whether to include Harmony patching boilerplate code. (Default: `true`)
+- `-p:a`, `--autoCopyMod`: Automatically copies the mod to `Spaceflight Simulator Game/Mods/modNameId/` directory on build. (Default: `false`)
+
+## Other Options
+
+- `-as`, `--assemblyName <assemblyName>`: The assembly name for the compiled mod. (Default: Falls back to `--modNameId` or `--name`)
+- `-r`, `--rootNamespace <rootNamespace>`: The root namespace for the C# project. (Default: Falls back to `--modNameId` or `--name`)
+- `-up`, `--updateBoilerplate <updateBoilerplate>`: Whether to include the boilerplate code for automatic updating. (Default: `false`)
+  - Automatic updating using Neptune-Sky's UITools' IUpdatable interface. Details at https://github.com/cucumber-sp/UITools.
 - `-c`, `--copyrightHolder <copyrightHolder>`: The copyright holder for the license. (Default: Falls back to `--param:author`)
 - `-g`, `--git`: Whether to initialise a local Git repository upon creation. (Default: `true`)
 - `-di`, `--discordLink <discordLink>`: A link to the mod's or author's Discord community. (Default: `""`)
 - `-re`, `--readMeDescription <readMeDescription>`: Description text for the README file, under the first H1. (Default: Falls back to `--modDescription`)
-- `-ha`, `--harmony <harmony>`: Whether to include Harmony patching boilerplate code. (Default: `true`)
 - `-im`, `--implicitManagedReferences <implicitManagedReferences>`: Whether to include implicit managed references. (Default: `true`)
 
 # Social Media

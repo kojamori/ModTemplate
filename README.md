@@ -10,7 +10,7 @@ One of the features of this template is that MSBuild can copy the build DLL into
 
 The default value is `False`, so you will have to manually copy the mod DLL into the SFS mods folder after building.
 
-You can set `autoCopyMod` to `true` when creating the project with the template, and it will automatically set this value to `True` in the generated `.csproj`.
+You can set "Automatic Mod Copying" (`autoCopyMod`) to `true` when creating the project with the template, and it will automatically set this value to `True` in the generated `.csproj`.
 
 ## Implicit References
 
@@ -23,7 +23,7 @@ This template also has an option to use implicit references for all of the manag
 
 The default value is `True`, so you will have to disable this if you don't want implicit references and want to manually add them yourself.
 
-You can also set `--implicitManagedReferences` (shorthand: `-im`) to `false` when creating the project with the template, and it will automatically set this value to `False` in the generated `.csproj`.
+You can also set "Implicit Managed References" (`implicitManagedReferences`) to `false` when creating the project with the template, and it will automatically set this value to `False` in the generated `.csproj`.
 
 # Requirements
 

@@ -78,11 +78,6 @@
             <HintPath>$(ModsFolder)\UITools\UITools.dll</HintPath>
             <Private>false</Private>
         </Reference>
-
-        <Reference Include="UniLog" Condition="Exists('$(ModsFolder)\UniLog')">
-            <HintPath>$(ModsFolder)\UniLog\UniLog.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
     </ItemGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="Exists('$(SFSPath)') And '$(AutoCopyMod)' == 'true'">

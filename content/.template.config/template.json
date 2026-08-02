@@ -78,9 +78,9 @@
     "minimumGameVersion": {
       "type": "parameter",
       "datatype": "string",
-      "defaultValue": "1.6.00.18",
+      "defaultValue": "1.6.00.16",
       "replaces": "minimumGameVersion",
-      "description": "The minimum game version required for the mod to work. Note this has no effect on the mod's compatibility with the game; it is purely informational. This defaults to the current game version (1.6.00.18).",
+      "description": "The minimum game version required for the mod to work. Note this has no effect on the mod's compatibility with the game; it is purely informational.",
       "displayName": "Minimum Game Version"
     },
 

@@ -2,7 +2,7 @@
 
 A .NET Framework 4.8 template for creating DLL mods for the video game Spaceflight Simulator (SFS).
 
-This template attempts to automatically locate the SFS game folder and reference all managed DLLs by searching common Steam installation paths on Windows and MacOS, but is untested on the latter OS.
+This template has the ability to automatically resolve the SFS installation path on Windows. Automatic resolution for MacOS and Linux is also supported but not tested. If the automatic resolution fails, you can manually set the SFS installation path in the project's `.csproj` file by changing the `SFSPath` value.
 
 ## Automatic Mod Copying to SFS Mods Folder
 

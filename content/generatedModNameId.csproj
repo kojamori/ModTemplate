@@ -1,86 +1,98 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
         <TargetFramework>net48</TargetFramework>
         <LangVersion>latest</LangVersion>
         
         <AssemblyName>generatedAssemblyName</AssemblyName>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-        <OutputPath>bin\Debug\</OutputPath>
+        <OutputPath>bin/Debug/</OutputPath>
 
-        <!-- DEFINE TEMPLATE TOKENS AS PROPERTIES INSTEAD OF ITEMS -->
         <ImplicitManagedReferences>generatedImplicitManagedReferences</ImplicitManagedReferences>
         <AutoCopyMod>generatedAutoCopyMod</AutoCopyMod>
     </PropertyGroup>
 
+    <!-- User Profile Home Path -->
     <PropertyGroup>
         <!-- Credits to https://cazzulino.com for this! -->
         <UserProfileHome Condition="'$([MSBuild]::IsOSUnixLike())' == 'true'">$(HOME)</UserProfileHome>
         <UserProfileHome Condition="'$([MSBuild]::IsOSUnixLike())' != 'true'">$(USERPROFILE)</UserProfileHome>
     </PropertyGroup>
 
+    <!-- Steam Path Resolution -->
     <PropertyGroup>
-        <!-- Windows typical steam path -->
-        <SteamPath Condition="Exists('C:\Program Files (x86)\Steam')">C:\Program Files (x86)\Steam</SteamPath>
+        <!-- 64 bit Windows path, note that registry paths must use backslashes -->
+        <SteamPath Condition="'$(OS)' == 'Windows_NT'">$([MSBuild]::GetRegistryValue(`HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Valve\Steam`, `InstallPath`))</SteamPath>
+        <!-- 32 bit Windows path, note that registry paths must use backslashes -->
+        <SteamPath Condition="'$(SteamPath)' == '' And '$(OS)' == 'Windows_NT'">$([MSBuild]::GetRegistryValue(`HKEY_LOCAL_MACHINE\SOFTWARE\Valve\Steam`, `InstallPath`))</SteamPath>
 
-        <!-- koja mori's steam path -->
-        <SteamPath Condition="'$(SteamPath)' == '' And Exists('$(UserProfileHome)\Applications\Steam')">$(UserProfileHome)\Applications\Steam</SteamPath>
-        
         <!-- MacOS typical steam path -->
-        <SteamPath Condition="'$(SteamPath)' == '' And Exists('$(UserProfileHome)\Library\Application Support\Steam')">$(UserProfileHome)\Library\Application Support\Steam</SteamPath>
+        <SteamPath Condition="'$(SteamPath)' == '' And Exists('$(UserProfileHome)/Library/Application Support/Steam')">$(UserProfileHome)/Library/Application Support/Steam</SteamPath>
 
-        <!-- fallback -->
-        <SteamPath Condition="'$(SteamPath)' == ''">C:\Program Files (x86)\Steam</SteamPath>
+        <!-- Linux path 1 (Flatpak) -->
+        <SteamPath Condition="'$(SteamPath)' == '' And Exists('$(UserProfileHome)/.var/app/com.valvesoftware.Steam/.local/share/Steam/')">$(UserProfileHome)/.var/app/com.valvesoftware.Steam/.local/share/Steam</SteamPath>
+
+        <!-- Linux path 2 (Native) -->
+        <SteamPath Condition="'$(SteamPath)' == '' And Exists('$(UserProfileHome)/.local/share/Steam')">$(UserProfileHome)/.local/share/Steam/</SteamPath>
+
+        <!-- Linux path 3 (Symlink) -->
+        <SteamPath Condition="'$(SteamPath)' == '' And Exists('$(UserProfileHome)/.steam/steam')">$(UserProfileHome)/.steam/steam</SteamPath>
+
+        <SteamPath Condition="'$(SteamPath)' == ''"><!-- You can manually set the Steam path here if automatic resolution fails. --></SteamPath>
     </PropertyGroup>
 
     <!-- Common Paths -->
     <PropertyGroup>
-        <SFSPath>$(SteamPath)\steamapps\common\Spaceflight Simulator\Spaceflight Simulator Game</SFSPath>
-        <ManagedFolder>$(SFSPath)\Spaceflight Simulator_Data\Managed</ManagedFolder>
-        <ModsFolder>$(SFSPath)\Mods</ModsFolder>
+        <!-- Replace backslashes with forward slashes -->
+        <CleanSteamPath>$(SteamPath.Replace('\', '/'))</CleanSteamPath>
+
+        <SFSPath>$(CleanSteamPath)/steamapps/common/Spaceflight Simulator/Spaceflight Simulator Game</SFSPath>
+        <ManagedFolder>$(SFSPath)/Spaceflight Simulator_Data/Managed</ManagedFolder>
+        <ModsFolder>$(SFSPath)/Mods</ModsFolder>
     </PropertyGroup> 
 
     <Target Name="VerifySFSPath" BeforeTargets="CoreCompile;PrepareForBuild">
         <Message Text="Spaceflight Simulator path resolved via XML conditions to: $(SFSPath)" Importance="High" />
     </Target>
 
+    <!-- Implicit Managed References -->
     <ItemGroup>
-        <Reference Include="$(ManagedFolder)\*.dll" Condition="'$(ImplicitManagedReferences)' == 'true'">
+        <Reference Include="$(ManagedFolder)/*.dll" Condition="'$(ImplicitManagedReferences)' == 'true'">
             <Private>false</Private>
         </Reference>
     </ItemGroup>
 
+    <!-- Explicit Managed References -->
     <ItemGroup>
         <Reference Include="Assembly-CSharp.dll" Condition="'$(ImplicitManagedReferences)' == 'false'">
-            <HintPath>$(ManagedFolder)\Assembly-CSharp.dll</HintPath>
+            <HintPath>$(ManagedFolder)/Assembly-CSharp.dll</HintPath>
             <Private>false</Private>
         </Reference>
 
         <Reference Include="UnityEngine.dll" Condition="'$(ImplicitManagedReferences)' == 'false'">
-            <HintPath>$(ManagedFolder)\UnityEngine.dll</HintPath>
+            <HintPath>$(ManagedFolder)/UnityEngine.dll</HintPath>
             <Private>false</Private>
         </Reference>
 
         <Reference Include="UnityEngine.CoreModule.dll" Condition="'$(ImplicitManagedReferences)' == 'false'">
-            <HintPath>$(ManagedFolder)\UnityEngine.CoreModule.dll</HintPath>
+            <HintPath>$(ManagedFolder)/UnityEngine.CoreModule.dll</HintPath>
             <Private>false</Private>
         </Reference>
 
         <Reference Include="0Harmony.dll" Condition="'$(ImplicitManagedReferences)' == 'false'">
-            <HintPath>$(ManagedFolder)\0Harmony.dll</HintPath>
+            <HintPath>$(ManagedFolder)/0Harmony.dll</HintPath>
             <Private>false</Private>
         </Reference>
     </ItemGroup>
 
+    <!-- Mod References -->
     <ItemGroup>
-        <!-- Mod References  =====================================================-->
-        <Reference Include="UITools" Condition="Exists('$(ModsFolder)\UITools')">
-            <HintPath>$(ModsFolder)\UITools\UITools.dll</HintPath>
+        <Reference Include="UITools" Condition="Exists('$(ModsFolder)/UITools')">
+            <HintPath>$(ModsFolder)/UITools/UITools.dll</HintPath>
             <Private>false</Private>
         </Reference>
     </ItemGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="Exists('$(SFSPath)') And '$(AutoCopyMod)' == 'true'">
-        <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="$(ModsFolder)\$(AssemblyName)\" />
+        <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="$(ModsFolder)/$(AssemblyName)/" />
     </Target>
 </Project>

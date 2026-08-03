@@ -1,6 +1,6 @@
 # SFS Code Mod Template
 
-A .NET Framework 4.8 template for creating SFS code mods easily and quickly, no more writing boilerplate yourself.
+A .NET Framework 4.8 template for creating DLL mods for the video game Spaceflight Simulator (SFS).
 
 This template attempts to automatically locate the SFS game folder and reference all managed DLLs by searching common Steam installation paths on Windows and MacOS, but is untested on the latter OS.
 
@@ -8,9 +8,7 @@ This template attempts to automatically locate the SFS game folder and reference
 
 One of the features of this template is that MSBuild can copy the build DLL into the SFS mods folder after building the mod successfully. You can enable/disable this by changing the `AutoCopyMod` value in the project's `.csproj` from `True/False`.
 
-The default value is `False`, so you will have to manually copy the mod DLL into the SFS mods folder after building.
-
-You can set "Automatic Mod Copying" (`autoCopyMod`) to `true` when creating the project with the template, and it will automatically set this value to `True` in the generated `.csproj`.
+You can set "Automatic Mod Copying" (`--autoCopyMod`, `-p:a` in the CLI) to `true` when creating the project with the template to enable this behaviour, as **it is disabled by default.**
 
 ## Implicit References
 
@@ -21,21 +19,28 @@ This template also has an option to use implicit references for all of the manag
 - `UnityEngine.CoreModule.dll`
 - `0Harmony.dll`.
 
-The default value is `True`, so you will have to disable this if you don't want implicit references and want to manually add them yourself.
-
-You can also set "Implicit Managed References" (`implicitManagedReferences`) to `false` when creating the project with the template, and it will automatically set this value to `False` in the generated `.csproj`.
+You can set "Implicit Managed References" (`--implicitManagedReferences`, `im` in the CLI) to `false` when creating the project with the template to disable this behaviour, as it **is enabled by default.**
 
 # Requirements
 
 - .NET SDK 6.0 and newer
+- .NET Framework 4.8 (pre-installed on Windows 10 and 11 operating systems)
 - SFS installed via Steam
 
 # Installation
+
+## .NET 7.0 and newer (most common)
 
 Run the following command to install the template from [NuGet](https://www.nuget.org/packages/kojamori.SFS.Templates.CodeMod):
 
 ```dotnetcli
 dotnet new install kojamori.SFS.Templates.CodeMod
+```
+
+## .NET 6.0 (older syntax)
+
+```dotnetcli
+dotnet new --install kojamori.SFS.Templates.CodeMod
 ```
 
 ## Updating

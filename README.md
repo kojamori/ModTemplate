@@ -129,6 +129,10 @@ They won't necessarily prevent the project from being created, but these will ca
 
 # Social Media
 
+## SFS Modding Guide
+
+https://kojamori.github.io/SFS-Modding-Guide/
+
 ## Discord
 
 https://discord.gg/QHEmcehAe9

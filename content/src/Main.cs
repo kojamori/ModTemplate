@@ -39,12 +39,13 @@ namespace generatedRootNamespace
         };
 
         #if (harmony)
-        private readonly Harmony _patcher = new Harmony(Instance.ModNameID);
+        private readonly Harmony _patcher;
         #endif
         
         public override void Early_Load()
         { 
             #if (harmony)
+            _patcher = new Harmony(Instance.ModNameID);
             _patcher.PatchAll();
             #endif
         }
@@ -81,12 +82,13 @@ namespace generatedRootNamespace
         public override Dictionary<string, string> Dependencies => new Dictionary<string, string>();
 
         #if (harmony)
-        private readonly Harmony _patcher = new Harmony(Instance.ModNameID);
+        private readonly Harmony _patcher;
         #endif
         
         public override void Early_Load()
         { 
             #if (harmony)
+            _patcher = new Harmony(Instance.ModNameID);
             _patcher.PatchAll();
             #endif
         }

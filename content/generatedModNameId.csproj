@@ -126,7 +126,7 @@
     <Target Name="VerifyInstallation" BeforeTargets="Build">
         <Error
             Condition="!Exists('$(ManagedFolder)')"
-            Text="Spaceflight Simulator installation could not be found. Edit FallbackSteamPath or install the game through Steam." 
+            Text="Spaceflight Simulator installation could not be found. Edit FallbackSteamPath in the .csproj or install the game through Steam." 
         />
     </Target>
 

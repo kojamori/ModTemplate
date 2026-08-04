@@ -36,7 +36,39 @@ To toggle this behaviour in an existing project made with this template, you can
 
 This is **is disabled by default.**
 
-## Mod Updating Boilerplate via UITools
+## Harmony Patching Boilerplate
+
+The template also includes boilerplate code for using Harmony for patching.
+
+When creating the project with the template, you can include/exclude this with by changing **"Include Harmony Boilerplate"** (`--harmony`, `ha` in the CLI) to `true` or `false`.
+
+This **is enabled by default.**
+
+```csharp
+// This is what your code will look like if you enable the "Include Harmony Patching Boilerplate" option when creating the project with the template.
+
+// ...
+using HarmonyLib;
+
+public class Main : Mod
+{
+  // ...
+
+  private Harmony _patcher;
+
+  public override void Early_Load()
+  {
+      _patcher = new Harmony(Instance.ModNameID);
+      _patcher.PatchAll();
+  }
+
+  // ...
+}
+```
+
+## Mod Updating Boilerplate via UITools (Deprecated)
+
+**DISCLAIMER: The server facillitating the automatic updates (by storing hashes of the latest version of updatable files) is currently offline. Please do not expect automatic updates for the time being.**
 
 The template can optionally include boilerplate for mod updating via UITools (details at https://github.com/cucumber-sp/UITools.) when creating the project with this template.
 
@@ -70,36 +102,6 @@ public class Main : Mod, IUpdatable
           new FolderPath(ModFolder).ExtendToFile(Assembly.GetExecutingAssembly().GetName().Name + ".dll")
       }
   };
-
-  // ...
-}
-```
-
-## Harmony Patching Boilerplate
-
-The template also includes boilerplate code for using Harmony for patching.
-
-When creating the project with the template, you can include/exclude this with by changing **"Include Harmony Boilerplate"** (`--harmony`, `ha` in the CLI) to `true` or `false`.
-
-This **is enabled by default.**
-
-```csharp
-// This is what your code will look like if you enable the "Include Harmony Patching Boilerplate" option when creating the project with the template.
-
-// ...
-using HarmonyLib;
-
-public class Main : Mod
-{
-  // ...
-
-  private Harmony _patcher;
-
-  public override void Early_Load()
-  {
-      _patcher = new Harmony(Instance.ModNameID);
-      _patcher.PatchAll();
-  }
 
   // ...
 }

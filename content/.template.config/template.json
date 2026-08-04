@@ -218,7 +218,15 @@
       "datatype": "bool",
       "defaultValue": "false",
       "description": "Whether to include the boilerplate code for automatic updating using Neptune-Sky's UITools' IUpdatable interface. Details at https://github.com/cucumber-sp/UITools.",
-      "displayName": "Include Automatic DLL Updating Boilerplate"
+      "displayName": "Include Automatic DLL Updating Boilerplate (Deprecated)"
+    },
+
+    "socials": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Whether to include a social media section in the README.",
+      "displayName": "README Social Media Section"
     },
 
     "discordLink": {

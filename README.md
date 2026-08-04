@@ -5,6 +5,14 @@ A .NET Framework 4.8 template for creating DLL mods for the video game Spaceflig
 This template has the ability to automatically resolve the SFS installation path on Windows for dynamic references to the managed DLLs.
 Automatic resolution for MacOS and Linux is also supported but not tested. If the automatic resolution fails, you can manually set the SFS installation path in the project's `.csproj` file by changing the `SFSPath` value.
 
+Features include:
+
+- Automatic resolution of SFS installation path
+- Automatic mod copying to SFS mods folder
+- Implicit references for managed DLLs
+- Harmony boilerplate
+- Automatic mod updating boilerplate via UITools
+
 ## Automatic Mod Copying to SFS Mods Folder
 
 One of the features of this template is that MSBuild can copy the build DLL into the SFS mods folder after building the mod successfully. You can enable/disable this by changing the `AutoCopyMod` value in the project's `.csproj` from `True/False`.
@@ -129,6 +137,10 @@ They won't necessarily prevent the project from being created, but these will ca
 - `-im`, `--implicitManagedReferences <implicitManagedReferences>`: Whether to include implicit managed references. (Default: `true`)
 
 # Social Media
+
+## Forums Post
+
+https://sfsforum.com/index.php?threads/code-mod-net-project-template.20090/
 
 ## SFS Modding Guide
 

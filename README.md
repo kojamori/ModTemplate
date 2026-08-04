@@ -15,22 +15,7 @@ Features include:
 
 ## Feature Documentation
 
-### Automatic Mod Copying to SFS Mods Folder
-
-One of the features of this template is that MSBuild can copy the build DLL into the SFS mods folder after building the mod successfully. You can enable/disable this by changing the `AutoCopyMod` value in the project's `.csproj` from `True/False`.
-
-You can set "Automatic Mod Copying" (`--autoCopyMod`, `-p:a` in the CLI) to `true` when creating the project with the template to enable this behaviour, as **it is disabled by default.**
-
-### Implicit References
-
-This template also has an option to use implicit references for all of the managed DLLs, which means you don't have to manually add them as references in your project. You can enable/disable this by changing the `ImplicitManagedReferences` value in the project's `.csproj` from `True/False`, and instead you get only essential references including:
-
-- `Assembly-CSharp.dll`
-- `UnityEngine.dll`
-- `UnityEngine.CoreModule.dll`
-- `0Harmony.dll`.
-
-You can set "Implicit Managed References" (`--implicitManagedReferences`, `im` in the CLI) to `false` when creating the project with the template to disable this behaviour, as it **is enabled by default.**
+See [here](FEATURES.md) for more information on the features of this template.
 
 # Requirements
 

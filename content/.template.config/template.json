@@ -1,7 +1,7 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "kojamori",
-  "classifications": ["Game", "Mod", "SFS"],
+  "classifications": ["Games", "Mod", "SFS"],
   "identity": "kojamori.SFS.Templates.CodeMod",
   "name": "SFS Code Mod Template",
   "shortName": "sfsmod",
@@ -10,7 +10,7 @@
     "language": "C#",
     "type": "project"
   },
-  "description": "A .NET Framework 4.8 template for creating SFS code mods easily and quickly, no more writing boilerplate yourself. Find more information at https://github.com/kojamori/SFS-Code-Mod-Template",
+  "description": "A .NET Framework 4.8 template for creating DLL mods for the video game Spaceflight Simulator (SFS).",
   "symbols": {
     "modNameId": {
       "type": "parameter",
@@ -218,7 +218,15 @@
       "datatype": "bool",
       "defaultValue": "false",
       "description": "Whether to include the boilerplate code for automatic updating using Neptune-Sky's UITools' IUpdatable interface. Details at https://github.com/cucumber-sp/UITools.",
-      "displayName": "Include Automatic DLL Updating Boilerplate"
+      "displayName": "Include Automatic DLL Updating Boilerplate (Deprecated)"
+    },
+
+    "socials": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Whether to include a social media section in the README.",
+      "displayName": "README Social Media Section"
     },
 
     "discordLink": {

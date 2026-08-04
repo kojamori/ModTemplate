@@ -20,7 +20,7 @@ TBD
 
 TBD
 
-<!--#if (!noSocials) -->
+<!--#if (socials) -->
 
 ## Social Media
 
@@ -30,7 +30,7 @@ TBD
 
 <!--#endif -->
 
-<!--#if (discordLink != "" && !noSocials) -->
+<!--#if (discordLink != "" && socials) -->
 
 ### Discord
 

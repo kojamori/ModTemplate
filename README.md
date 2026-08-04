@@ -13,13 +13,15 @@ Features include:
 - Harmony boilerplate
 - Automatic mod updating boilerplate via UITools
 
-## Automatic Mod Copying to SFS Mods Folder
+## Feature Documentation
+
+### Automatic Mod Copying to SFS Mods Folder
 
 One of the features of this template is that MSBuild can copy the build DLL into the SFS mods folder after building the mod successfully. You can enable/disable this by changing the `AutoCopyMod` value in the project's `.csproj` from `True/False`.
 
 You can set "Automatic Mod Copying" (`--autoCopyMod`, `-p:a` in the CLI) to `true` when creating the project with the template to enable this behaviour, as **it is disabled by default.**
 
-## Implicit References
+### Implicit References
 
 This template also has an option to use implicit references for all of the managed DLLs, which means you don't have to manually add them as references in your project. You can enable/disable this by changing the `ImplicitManagedReferences` value in the project's `.csproj` from `True/False`, and instead you get only essential references including:
 

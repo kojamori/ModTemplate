@@ -29,7 +29,7 @@ namespace generatedRootNamespace
         };
     
         // Automatic updating using Neptune-Sky's UITools' IUpdatable interface.
-        //  Details at https://github.com/cucumber-sp/UITools.
+        // Details at https://github.com/cucumber-sp/UITools.
         public Dictionary<string, FilePath> UpdatableFiles => new()
         {
             {
@@ -37,14 +37,15 @@ namespace generatedRootNamespace
                 new FolderPath(ModFolder).ExtendToFile(Assembly.GetExecutingAssembly().GetName().Name + ".dll")
             }
         };
-
         #if (harmony)
-        private readonly Harmony _patcher = new Harmony(Instance.ModNameID);
-        #endif
         
+        private Harmony _patcher; 
+
+        #endif
         public override void Early_Load()
         { 
             #if (harmony)
+            _patcher = new Harmony(Instance.ModNameID);
             _patcher.PatchAll();
             #endif
         }
@@ -79,14 +80,15 @@ namespace generatedRootNamespace
         public override string Description => "modDescription";
 
         public override Dictionary<string, string> Dependencies => new Dictionary<string, string>();
-
         #if (harmony)
-        private readonly Harmony _patcher = new Harmony(Instance.ModNameID);
+
+        private Harmony _patcher;
+
         #endif
-        
         public override void Early_Load()
         { 
             #if (harmony)
+            _patcher = new Harmony(Instance.ModNameID);
             _patcher.PatchAll();
             #endif
         }

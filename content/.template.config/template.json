@@ -234,7 +234,8 @@
       "datatype": "string",
       "defaultValue": "",
       "description": "The Discord invite link for the mod's server. This is displayed in the in-game mod list.",
-      "displayName": "Discord Invite Link"
+      "displayName": "Discord Invite Link",
+      "replaces": "discordLink"
     },
 
     "readMeDescription": {

@@ -5,10 +5,14 @@
         
         <AssemblyName>generatedAssemblyName</AssemblyName>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-        <OutputPath>bin/Debug/</OutputPath>
+        <OutputPath>bin/$(Configuration)</OutputPath>
 
+        <!-- === Settings == -->
+        <!-- These are the only things you should be changing -->
         <ImplicitManagedReferences>generatedImplicitManagedReferences</ImplicitManagedReferences>
         <AutoCopyMod>generatedAutoCopyMod</AutoCopyMod>
+        <FallbackSteamPath>UnknownSteamPath</FallbackSteamPath>
+        <!-- =============== -->
     </PropertyGroup>
 
     <!-- OS Detection -->
@@ -47,14 +51,9 @@
 
         <!-- Linux path 3 (Symlink) -->
         <DirtySteamPath Condition="'$(DirtySteamPath)' == '' And Exists('$(UserProfileHome)/.steam/steam')">$(UserProfileHome)/.steam/steam</DirtySteamPath>
-        
-        <!-- MANUAL STEAM PATH LOCATION -->
-        <!-- You don't need to change anything else -->
-        <FallbackSteamPath Condition="'$(DirtySteamPath)' == ''">UnknownSteamPath</FallbackSteamPath>
 
         <ResolvedSteamPath Condition="'$(DirtySteamPath)' != ''">$(DirtySteamPath)</ResolvedSteamPath>
         <ResolvedSteamPath Condition="'$(DirtySteamPath)' == ''">$(FallbackSteamPath)</ResolvedSteamPath>
-
         <SteamPath>$([System.String]::Copy('$(ResolvedSteamPath)').Replace('\', '/'))</SteamPath>
     </PropertyGroup>
 
@@ -126,7 +125,10 @@
     <Target Name="VerifyInstallation" BeforeTargets="Build">
         <Error
             Condition="!Exists('$(ManagedFolder)')"
-            Text="Spaceflight Simulator installation could not be found. Edit FallbackSteamPath in the .csproj or install the game through Steam." 
+            Text="
+            Spaceflight Simulator installation could not be found. 
+            Edit FallbackSteamPath in the .csproj or install the game through Steam.
+            " 
         />
     </Target>
 

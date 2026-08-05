@@ -29,7 +29,6 @@ TBD
 TBD
 
 <!--#endif -->
-
 <!--#if (discordLink != "" && socials) -->
 
 ### Discord

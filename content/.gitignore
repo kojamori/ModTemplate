@@ -3,6 +3,7 @@ obj/
 bin/
 *.log
 .env
+*.tmp
 
 # Ignore OS-specific files
 *.DS_Store

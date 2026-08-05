@@ -39,7 +39,7 @@ namespace generatedRootNamespace
         };
 
         #if (harmony)
-        private readonly Harmony _patcher;
+        private Harmony _patcher;
         #endif
         
         public override void Early_Load()
@@ -82,7 +82,7 @@ namespace generatedRootNamespace
         public override Dictionary<string, string> Dependencies => new Dictionary<string, string>();
 
         #if (harmony)
-        private readonly Harmony _patcher;
+        private Harmony _patcher;
         #endif
         
         public override void Early_Load()

@@ -22,6 +22,7 @@ namespace generatedRootNamespace
         public override string MinimumGameVersionNecessary => "minimumGameVersion";
         public override string ModVersion => "modVersion";
         public override string Description => "modDescription";
+        public override string IconLink => "";
 
         public override Dictionary<string, string> Dependencies => new Dictionary<string, string>()
         {
@@ -38,16 +39,16 @@ namespace generatedRootNamespace
             }
         };
 
-        #if (harmony)
+#if (harmony)
         private Harmony _patcher;
-        #endif
+#endif
         
         public override void Early_Load()
         { 
-            #if (harmony)
+#if (harmony)
             _patcher = new Harmony(Instance.ModNameID);
             _patcher.PatchAll();
-            #endif
+#endif
         }
 
         public override void Load()
@@ -78,6 +79,7 @@ namespace generatedRootNamespace
         public override string MinimumGameVersionNecessary => "minimumGameVersion";
         public override string ModVersion => "modVersion";
         public override string Description => "modDescription";
+        public override string IconLink => "";
 
         public override Dictionary<string, string> Dependencies => new Dictionary<string, string>();
 

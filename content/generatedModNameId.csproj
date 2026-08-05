@@ -84,8 +84,8 @@
     </Target>
 
     <!-- Implicit Managed References -->
-    <ItemGroup>
-        <Reference Include="$(ManagedFolder)/*.dll" Condition="'$(ImplicitManagedReferences)' == 'true'">
+    <ItemGroup Condition="'$(ImplicitManagedReferences)' == 'true'">
+        <Reference Include="$(ManagedFolder)/*.dll">
             <Private>false</Private>
         </Reference>
     </ItemGroup>
